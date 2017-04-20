@@ -560,6 +560,8 @@ CREATE INDEX teams_profile_id_index ON teams USING btree (profile_id);
 
 CREATE UNIQUE INDEX upload_blacklist_uploader_id_idx ON upload_blacklist USING btree (uploader_id);
 
+CREATE UNIQUE INDEX users_steamid_idx ON users USING btree (steamid);
+
 
 --
 -- PostgreSQL database dump complete
