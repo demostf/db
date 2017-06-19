@@ -467,7 +467,7 @@ ALTER TABLE ONLY users
 -- Name: alias_trgm_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX alias_trgm_idx ON players USING gist (name gist_trgm_ops);
+CREATE INDEX alias_trgm_idx ON players USING gin (name gin_trgm_ops);
 
 
 --
