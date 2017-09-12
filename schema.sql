@@ -505,6 +505,9 @@ CREATE INDEX demos_red_team_id_index ON demos USING btree (red_team_id);
 CREATE INDEX demos_uploader_index ON demos USING btree (uploader);
 
 
+CREATE INDEX demos_map_index ON demos USING btree (map);
+
+
 --
 -- Name: kills_demo_id_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
