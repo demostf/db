@@ -518,6 +518,9 @@ CREATE INDEX players_name_index
 CREATE INDEX players_user_id_index
   ON players USING BTREE (user_id);
 
+CREATE INDEX players_user_demo_id_index
+  ON players USING BTREE (user_id, demo_id DESC);
+
 --
 -- Name: teams_id_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
