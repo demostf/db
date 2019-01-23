@@ -1,4 +1,4 @@
-FROM postgres:9.6-alpine
+FROM postgres:11-alpine
 
 RUN mkdir -p /docker-entrypoint-initdb.d
 
