@@ -554,6 +554,14 @@ CREATE MATERIALIZED VIEW map_list AS
   GROUP BY clean_map_name(map)
   ORDER BY count DESC;
 
+CREATE MATERIALIZED VIEW name_list AS
+  SELECT user_id, p.name, count(demo_id) AS count, steamid
+  FROM players p
+  INNER JOIN users u ON u.id=p.user_id
+  GROUP BY p.name, user_id, steamid;
+
+CREATE INDEX alias_name_trgm_idx ON name_list USING GIN (name gin_trgm_ops);
+
 --
 -- PostgreSQL database dump complete
 --
