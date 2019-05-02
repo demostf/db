@@ -562,6 +562,18 @@ CREATE MATERIALIZED VIEW name_list AS
 
 CREATE INDEX alias_name_trgm_idx ON name_list USING GIN (name gin_trgm_ops);
 
+CREATE MATERIALIZED VIEW users_named AS
+  with names as
+  (
+    select name, count, user_id,
+      rank() over (partition by user_id order by user_id, count desc) rn
+    from name_list
+  )
+  select id, steamid, n.name, avatar, token
+  from   names n
+  inner join users u on u.id = n.user_id
+  where  rn = 1;
+
 --
 -- PostgreSQL database dump complete
 --
