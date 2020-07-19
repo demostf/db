@@ -441,6 +441,9 @@ ALTER TABLE ONLY users
 CREATE INDEX alias_trgm_idx
   ON players USING GIN (name gin_trgm_ops);
 
+CREATE INDEX chat_demo_idx
+  ON chat USING BTREE (demo_id);
+
 --
 -- Name: demos_blue_team_id_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
