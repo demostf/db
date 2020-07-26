@@ -458,6 +458,9 @@ CREATE INDEX demos_blue_team_id_index
 CREATE INDEX demos_hash_index
   ON demos USING BTREE (hash);
 
+CREATE INDEX demos_backend_index
+  ON demos USING BTREE (backend);
+
 --
 -- Name: demos_playercount_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
