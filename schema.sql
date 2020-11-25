@@ -489,6 +489,9 @@ CREATE INDEX demos_map_index
 CREATE INDEX demos_clean_map_index
   ON demos USING BTREE (clean_map_name(map));
 
+CREATE INDEX demos_time_index
+  ON demos USING BTREE (created_at);
+
 --
 -- Name: kills_demo_id_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
