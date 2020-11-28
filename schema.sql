@@ -554,6 +554,9 @@ CREATE UNIQUE INDEX upload_blacklist_uploader_id_idx
 CREATE UNIQUE INDEX users_steamid_idx
   ON users USING BTREE (steamid);
 
+CREATE UNIQUE INDEX users_token_idx
+  ON users USING BTREE (token);
+
 
 CREATE MATERIALIZED VIEW map_list AS
   SELECT DISTINCT
