@@ -133,7 +133,6 @@ CREATE TABLE kills (
   attacker_id INTEGER                     NOT NULL,
   assister_id INTEGER                     NOT NULL,
   victim_id   INTEGER                     NOT NULL,
-  weapon      CHARACTER VARYING(255)      NOT NULL,
   created_at  TIMESTAMP WITHOUT TIME ZONE NOT NULL,
   updated_at  TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
