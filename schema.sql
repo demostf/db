@@ -55,9 +55,7 @@ CREATE TABLE chat (
   demo_id    INTEGER                     NOT NULL,
   "from"     CHARACTER VARYING(255)      NOT NULL,
   text       CHARACTER VARYING(255)      NOT NULL,
-  "time"     INTEGER                     NOT NULL,
-  created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-  updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL
+  "time"     INTEGER                     NOT NULL
 );
 
 --
@@ -132,9 +130,7 @@ CREATE TABLE kills (
   demo_id     INTEGER                     NOT NULL,
   attacker_id INTEGER                     NOT NULL,
   assister_id INTEGER                     NOT NULL,
-  victim_id   INTEGER                     NOT NULL,
-  created_at  TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-  updated_at  TIMESTAMP WITHOUT TIME ZONE NOT NULL
+  victim_id   INTEGER                     NOT NULL
 );
 
 --
@@ -174,9 +170,7 @@ CREATE TABLE players (
   user_id      INTEGER                     NOT NULL,
   name         CHARACTER VARYING(255)      NOT NULL,
   team         CHARACTER VARYING(255)      NOT NULL,
-  class        CHARACTER VARYING(255)      NOT NULL,
-  created_at   TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-  updated_at   TIMESTAMP WITHOUT TIME ZONE NOT NULL
+  class        CHARACTER VARYING(255)      NOT NULL
 );
 
 --
