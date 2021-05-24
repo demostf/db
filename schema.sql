@@ -142,9 +142,9 @@ CREATE TABLE players (
   name         CHARACTER VARYING(255)      NOT NULL,
   team         CHARACTER VARYING(255)      NOT NULL,
   class        CHARACTER VARYING(255)      NOT NULL,
-  kills        INTEGER,
-  assists      INTEGER,
-  deaths       INTEGER
+  kills        INTEGER                     NOT NULL,
+  assists      INTEGER                     NOT NULL,
+  deaths       INTEGER                     NOT NULL
 );
 
 --
