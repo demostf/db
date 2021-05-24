@@ -122,35 +122,6 @@ CACHE 1;
 ALTER SEQUENCE demos_id_seq OWNED BY demos.id;
 
 --
--- Name: kills; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE kills (
-  id          INTEGER                     NOT NULL,
-  demo_id     INTEGER                     NOT NULL,
-  attacker_id INTEGER                     NOT NULL,
-  assister_id INTEGER                     NOT NULL,
-  victim_id   INTEGER                     NOT NULL
-);
-
---
--- Name: kills_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE kills_id_seq
-START WITH 1
-INCREMENT BY 1
-NO MINVALUE
-NO MAXVALUE
-CACHE 1;
-
---
--- Name: kills_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE kills_id_seq OWNED BY kills.id;
-
---
 -- Name: migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -170,7 +141,10 @@ CREATE TABLE players (
   user_id      INTEGER                     NOT NULL,
   name         CHARACTER VARYING(255)      NOT NULL,
   team         CHARACTER VARYING(255)      NOT NULL,
-  class        CHARACTER VARYING(255)      NOT NULL
+  class        CHARACTER VARYING(255)      NOT NULL,
+  kills        INTEGER,
+  assists      INTEGER,
+  deaths       INTEGER
 );
 
 --
@@ -333,13 +307,6 @@ ALTER TABLE ONLY demos
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY kills
-  ALTER COLUMN id SET DEFAULT nextval('kills_id_seq' :: REGCLASS);
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY players
   ALTER COLUMN id SET DEFAULT nextval('players_id_seq' :: REGCLASS);
 
@@ -384,13 +351,6 @@ ALTER TABLE ONLY chat
 
 ALTER TABLE ONLY demos
   ADD CONSTRAINT demos_pkey PRIMARY KEY (id);
-
---
--- Name: kills_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY kills
-  ADD CONSTRAINT kills_pkey PRIMARY KEY (id);
 
 --
 -- Name: players_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
@@ -484,13 +444,6 @@ CREATE INDEX demos_clean_map_index
 
 CREATE INDEX demos_time_index
   ON demos USING BTREE (created_at);
-
---
--- Name: kills_demo_id_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX kills_demo_id_idx
-  ON kills USING BTREE (demo_id);
 
 --
 -- Name: players_class_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
