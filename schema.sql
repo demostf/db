@@ -46,7 +46,7 @@ SET default_with_oids = FALSE;
 
 CREATE FUNCTION clean_map_name(map TEXT)
   RETURNS TEXT AS $$
-SELECT regexp_replace(map, '(_(a|b|beta|u|r|v|rc|final|comptf|ugc)?[0-9]*[a-z]?$)|([0-9]+[a-z]?$)', '', 'g');
+SELECT regexp_replace(map, '(_(a|b|beta|u|r|v|rc|final|comptf|ugc|f)?[0-9]*[a-z]?$)|([0-9]+[a-z]?$)', '', 'g');
 $$ LANGUAGE SQL;
 
 
