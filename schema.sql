@@ -44,9 +44,9 @@ SET default_with_oids = FALSE;
 -- Name: chat; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE FUNCTION clean_map_name(map TEXT)
+CREATE OR REPLACE FUNCTION clean_map_name(map TEXT)
   RETURNS TEXT AS $$
-SELECT regexp_replace(map, '(_(a|b|beta|u|r|v|rc|final|comptf|ugc|f)?[0-9]*[a-z]?$)|([0-9]+[a-z]?$)', '', 'g');
+SELECT regexp_replace(replace(map, 'workshop/', ''), '((_(a|b|beta|u|r|v|rc|final|comptf|ugc|f)?[0-9]*[a-z]?)?(_(a|b|beta|u|r|v|rc|final|comptf|ugc|f)?[0-9]*[a-z]?(_nb[0-9]*)?)|([0-9]+[a-z]?))(\.[a-z0-9]+)?$', '', 'g');
 $$ LANGUAGE SQL;
 
 
@@ -512,6 +512,9 @@ CREATE MATERIALIZED VIEW map_list AS
   GROUP BY clean_map_name(map)
   ORDER BY count DESC;
 
+CREATE UNIQUE INDEX map_list_map ON map_list USING BTREE (map);
+CREATE INDEX map_list_count ON map_list USING BTREE (count);
+
 CREATE MATERIALIZED VIEW name_list AS
   SELECT user_id, p.name, count(demo_id) AS count, steamid
   FROM players p
@@ -519,6 +522,9 @@ CREATE MATERIALIZED VIEW name_list AS
   GROUP BY p.name, user_id, steamid;
 
 CREATE INDEX alias_name_trgm_idx ON name_list USING GIN (name gin_trgm_ops);
+
+CREATE INDEX name_list_user_id ON name_list USING BTREE (user_id);
+CREATE UNIQUE INDEX name_list_user_id_name ON name_list USING BTREE (user_id, name);
 
 CREATE MATERIALIZED VIEW users_named AS
   with names as
