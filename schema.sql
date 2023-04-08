@@ -533,10 +533,13 @@ CREATE MATERIALIZED VIEW users_named AS
       rank() over (partition by user_id order by user_id, count desc) rn
     from name_list
   )
-  select id, steamid, n.name, avatar, token
+  select id, steamid, max(n.name) as name, max(avatar) as avatar, max(token) as token
   from   names n
   inner join users u on u.id = n.user_id
-  where  rn = 1;
+  where  rn = 1 group by id, steamid;
+
+CREATE UNIQUE INDEX users_named_id ON users_named USING BTREE (id);
+CREATE UNIQUE INDEX users_named_steam_id ON users_named USING BTREE (steamid);
 
 --
 -- PostgreSQL database dump complete
