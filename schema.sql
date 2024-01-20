@@ -134,6 +134,15 @@ CREATE TABLE migrations (
 -- Name: players; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
+CREATE OR REPLACE FUNCTION get_steam_id(user_id INTEGER) RETURNS TEXT AS $$
+DECLARE
+    result TEXT;
+BEGIN
+    SELECT users.steamid INTO result FROM users  WHERE id = user_id;
+    RETURN result;
+END; $$
+    LANGUAGE PLPGSQL IMMUTABLE;
+
 CREATE TABLE players (
   id           INTEGER                     NOT NULL,
   demo_id      INTEGER                     NOT NULL,
@@ -144,7 +153,8 @@ CREATE TABLE players (
   class        CHARACTER VARYING(255)      NOT NULL,
   kills        INTEGER                     NOT NULL,
   assists      INTEGER                     NOT NULL,
-  deaths       INTEGER                     NOT NULL
+  deaths       INTEGER                     NOT NULL,
+  steam_id TEXT GENERATED ALWAYS AS (get_steam_id(user_id)) STORED
 );
 
 --
@@ -444,6 +454,9 @@ CREATE INDEX demos_clean_map_index
 
 CREATE INDEX demos_time_index
   ON demos USING BTREE (created_at);
+
+CREATE INDEX players_steam_demo_idx
+  ON players USING BTREE (steam_id, demo_id);
 
 --
 -- Name: players_class_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
