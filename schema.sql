@@ -138,7 +138,7 @@ CREATE OR REPLACE FUNCTION get_steam_id(user_id INTEGER) RETURNS TEXT AS $$
 DECLARE
     result TEXT;
 BEGIN
-    SELECT users.steamid INTO result FROM users  WHERE id = user_id;
+    SELECT users.steamid INTO result FROM public.users WHERE id = user_id;
     RETURN result;
 END; $$
     LANGUAGE PLPGSQL IMMUTABLE;
