@@ -101,7 +101,8 @@ CREATE TABLE demos (
   "playerCount" INTEGER DEFAULT 0                                      NOT NULL,
   hash          CHARACTER VARYING(255) DEFAULT '' :: CHARACTER VARYING NOT NULL,
   blue_team_id  INTEGER,
-  red_team_id   INTEGER
+  red_team_id   INTEGER,
+  private_until TIMESTAMP WITH TIME ZONE
 );
 
 --
